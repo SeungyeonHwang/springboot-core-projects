@@ -5,7 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.w3c.dom.html.HTMLHeadElement;
 
 @Controller
 public class HelloController {
@@ -46,6 +45,7 @@ public class HelloController {
         public String getName() {
             return name;
         }
+
         public void setName(String name) {
             this.name = name;
         }

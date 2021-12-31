@@ -1,5 +1,7 @@
 package springboot.springbootweb.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import springboot.springbootweb.domain.Member;
 import springboot.springbootweb.repository.MemberRepository;
 
@@ -7,11 +9,13 @@ import java.util.List;
 import java.util.Optional;
 
 //비즈니스 로직(Repository -> 단순 DB CRUD / Service -> 비즈니스에 가까운 이름)
+@Service //@Component 포함
 public class MemberService {
 
     private final MemberRepository memberRepository;
 
     //의존성 주입(직접 new 하지 않는다 : DI)
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
