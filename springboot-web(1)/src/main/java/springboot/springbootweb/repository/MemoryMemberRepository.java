@@ -1,12 +1,11 @@
 package springboot.springbootweb.repository;
 
-import org.springframework.stereotype.Repository;
 import springboot.springbootweb.domain.Member;
 
 import java.util.*;
 
 //임시 구현체
-@Repository
+//@Repository
 public class MemoryMemberRepository implements MemberRepository {
 
     //임시 저장을 위한 맵
