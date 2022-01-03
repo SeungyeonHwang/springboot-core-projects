@@ -1,34 +1,28 @@
 package springboot.springbootweb.service;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 import springboot.springbootweb.domain.Member;
-import springboot.springbootweb.repository.MemoryMemberRepository;
+import springboot.springbootweb.repository.MemberRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//테스트는 한글로 하는게 직관적
-//순수한 자바코드의 테스트(Unit Test) -> 이게 잘 되야 좋은 테스트
-class MemberServiceTest {
+//통합 테스트
+//Spring 엮어서 테스트
+//테스트는 보통 테스트 서버의 데이터 사용 or 로컬에 있는 DB 사용
+@SpringBootTest //Spring 실행
+@Transactional //insert query 실행 -> Commit(auto Commit) -> DB반영, //Rollabck 해주기 때문에(하나하나) 테스트 DB에 값 안남는다 (반복 가능)
+class MemberServiceIntegrationTest {
 
-    MemberService memberService;
-    MemoryMemberRepository memberRepository;
-
-    //동작하기 전 실행
-    @BeforeEach
-    public void beforeEach() {
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository); //MemberService의 MemoryMemberRepository 일치(일관성)
-    }
-
-    @AfterEach
-    public void afterEach() {
-        memberRepository.clearStore();
-    }
+    //테스트 케이스는 간이로 가장 편한 방법으로 DI (필요한것 인젝션)
+    @Autowired MemberService memberService;
+    @Autowired MemberRepository memberRepository; //구현체는 SpringConfiguration 에서 올라온다
 
     @Test
+//    @Commit // 저장됨
     void 회원가입() {
         //given
         Member member = new Member();
@@ -69,13 +63,5 @@ class MemberServiceTest {
 //        } catch (IllegalStateException e) {
 //            assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
 //        }
-    }
-
-    @Test
-    void findMembers() {
-    }
-
-    @Test
-    void findOne() {
     }
 }

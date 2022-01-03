@@ -2,7 +2,13 @@ package springboot.springbootweb.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import springboot.springbootweb.domain.Member;
 import springboot.springbootweb.service.MemberService;
+
+import java.util.List;
 
 //Bean 관리(Annotation : 컴포넌트 스캔 방식)
 //SpringbootWebApplication 하위 클래스만 컴포넌트 스캔함(패키지 단위)
@@ -31,5 +37,36 @@ public class MemberController {
     @Autowired //컨테이너의 memberService 연결 해줌, bean에 등록되어있어야 작동
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
+    }
+
+    /**
+     * 회원 가입(화면 전이)
+     */
+    @GetMapping("/members/new") //GET mapping 조회
+    public String createdForm() {
+        return "members/createMemberForm";
+    }
+
+    /**
+     * 회원 가입(내부 처리)
+     */
+    @PostMapping("/members/new") //POST mapping 데이터 전달
+    public String create(MemberForm form) {
+        Member member = new Member();
+        member.setName(form.getName());
+
+        memberService.join(member);
+
+        return "redirect:/";
+    }
+
+    /**
+     * 회원 조회(All)
+     */
+    @GetMapping("/members")
+    public String list(Model model) {
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);
+        return "members/memberList";
     }
 }

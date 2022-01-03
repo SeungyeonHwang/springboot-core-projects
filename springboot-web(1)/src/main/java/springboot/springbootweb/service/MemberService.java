@@ -1,5 +1,6 @@
 package springboot.springbootweb.service;
 
+import org.springframework.transaction.annotation.Transactional;
 import springboot.springbootweb.domain.Member;
 import springboot.springbootweb.repository.MemberRepository;
 
@@ -8,6 +9,7 @@ import java.util.Optional;
 
 //비즈니스 로직(Repository -> 단순 DB CRUD / Service -> 비즈니스에 가까운 이름)
 //@Service //@Component 포함
+@Transactional //JPA -> 모든 처리 Transaction
 public class MemberService {
 
     private final MemberRepository memberRepository;
