@@ -18,8 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 class MemberServiceIntegrationTest {
 
     //테스트 케이스는 간이로 가장 편한 방법으로 DI (필요한것 인젝션)
-    @Autowired MemberService memberService;
-    @Autowired MemberRepository memberRepository; //구현체는 SpringConfiguration 에서 올라온다
+    @Autowired
+    MemberService memberService;
+    @Autowired
+    MemberRepository memberRepository; //구현체는 SpringConfiguration 에서 올라온다
 
     @Test
 //    @Commit // 저장됨
