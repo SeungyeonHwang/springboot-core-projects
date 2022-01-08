@@ -7,10 +7,9 @@
   - 🔹springboot-web(3) : (3)스프링 MVC 2편 - 백엔드 웹 개발 활용 기술
 - **SpringCore**
   - 🔹spring-core(1) : 스프링 핵심원리 - 기본편
-  - 🔹spring-core(1) : 스프링 핵심원리 - 고급편
+  - 🔹spring-core(2) : 스프링 핵심원리 - 고급편
 - **HTTP**
   - 🔸모든 개발자를 위한 HTTP 웹 기본 지식
----
 - **JPA & Query DSL**
   - 🔸실전! 스프링 부트와 JPA 활용1 - 웹 애플리케이션 개발 
   - 🔹실전! 스프링 부트와 JPA 활용2 - API 개발과 성능 최적화
