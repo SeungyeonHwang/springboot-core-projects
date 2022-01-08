@@ -11,7 +11,7 @@ import springboot.springbootweb.service.MemberService;
 public class SpringConfig {
 
     //Spring Data JPA(가장 진화환 형태) -> 그냥 인젝션 받으면 알아서 구현체 등록됨
-    private  final MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     @Autowired
     public SpringConfig(MemberRepository memberRepository) {
@@ -50,4 +50,10 @@ public class SpringConfig {
 ////        return new JdbcTemplateMemberRepository(dataSource); //JDBC Template
 ////        return new JpaMemberRepository(em); //가장 효율적인 형태(JPA는 인터페이스 -> Hibernate 구현체(오픈 소스))
 //    }
+
+    //AOP
+/*    @Bean
+    public TimeTraceAop timeTraceAop() {
+        return new TimeTraceAop();
+    }*/
 }

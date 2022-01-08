@@ -37,6 +37,7 @@ public class MemberController {
     @Autowired //컨테이너의 memberService 연결 해줌, bean에 등록되어있어야 작동
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
+//        System.out.println("memberService = " + memberService.getClass()); -> Proxy 서버 올라감(가짜), DI의 장점
     }
 
     /**
