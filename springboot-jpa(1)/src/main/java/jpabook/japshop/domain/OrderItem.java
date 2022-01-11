@@ -7,8 +7,8 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
+@Table(name = "order_item")
+@Getter @Setter
 public class OrderItem {
     @Id
     @GeneratedValue

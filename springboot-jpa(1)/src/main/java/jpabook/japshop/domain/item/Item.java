@@ -1,5 +1,6 @@
 package jpabook.japshop.domain.item;
 
+import jpabook.japshop.domain.Category;
 import jpabook.japshop.domain.OrderItem;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,9 +16,10 @@ import java.util.List;
  * 3. JOINED : 가장 정규화된 형태
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE) //상속관계 매핑 전략 선택 필요함
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) //상속관계 매핑 전략 선택 필요함, 하나의 테이블에 다 때려박는 것
 @DiscriminatorColumn(name = "dtype") //구분할때
-@Getter @Setter
+@Getter
+@Setter
 public abstract class Item {
     //추상 클래스로 만든다 Why -> 구현체 만들 것이기 때문
     //상속관계 매핑 필요, Album/Book/Movie
@@ -27,11 +29,14 @@ public abstract class Item {
     @Column(name = "item_id")
     private Long id;
 
-    //단방향 -> 매핑 불필요
-    private List<OrderItem> orderItems = new ArrayList<>();
-
-    //고통속성
+    //공통속성
+    private int stockQuantity;
     private String name;
     private int price;
-    private int stockQuantity;
+
+    //단방향 -> 매핑 불필요
+//    private List<OrderItem> orderItems = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "items") //거울
+    private List<Category> categories = new ArrayList<>();
 }
