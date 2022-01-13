@@ -3,7 +3,7 @@
 ## ***JAVA***
 ### 김영한 SpringBoot & JPA 
 - **Spring Web Framwork**
-  - ◼springboot-web(1) : (1)스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술
+  - 🔘springboot-web(1) : (1)스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술 【DONE】
   - 🔹springboot-web(2) : (2)스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술
   - 🔹springboot-web(3) : (3)스프링 MVC 2편 - 백엔드 웹 개발 활용 기술
 - **SpringCore**
@@ -18,6 +18,5 @@
   - 🔹실전! 스프링 데이터 JPA
   - 🔹Query DSL
 
--> 예정 : MicroService / Batch .. 인프런 , 패스트 캠프 찾아보기
 ---
 ## ***Kotlin***
