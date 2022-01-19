@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
+@Getter @Setter //Setter 는 실무에서 열지 않는다(수정의 가능성이 있기 때문)
 public class Member {
 
     @Id @GeneratedValue //Seq 자동 생성

@@ -22,7 +22,9 @@ public class MemberRepository {
 
     //저장
     public void save(Member member) {
-        em.persist(member); //트랜잭션 Commit 되는 순간 insert 쿼리 날라간다, PK는 보장되어있다
+        //트랜잭션 Commit 되는 순간 insert 쿼리 날라간다, PK는 보장되어있다
+        //Generate Value 전략에서는 insert문이 안나간다, commit 될때 flush 되면서 Insert날라간다
+        em.persist(member);
     }
 
     //단건 조회
