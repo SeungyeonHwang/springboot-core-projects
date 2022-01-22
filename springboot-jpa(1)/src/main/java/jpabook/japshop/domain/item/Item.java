@@ -1,7 +1,7 @@
 package jpabook.japshop.domain.item;
 
 import jpabook.japshop.domain.Category;
-import jpabook.japshop.domain.OrderItem;
+import jpabook.japshop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,13 +30,34 @@ public abstract class Item {
     private Long id;
 
     //공통속성
-    private int stockQuantity;
     private String name;
     private int price;
+    private int stockQuantity;
 
     //단방향 -> 매핑 불필요
 //    private List<OrderItem> orderItems = new ArrayList<>();
 
     @ManyToMany(mappedBy = "items") //거울
     private List<Category> categories = new ArrayList<>();
+
+    //==비즈니스 로직==//
+    //도메인 주도 설계, 엔티티 자체에서 해결할 수 있는 것은 엔티티 안에 비즈니스 로직 넣는게 좋음(응집력, 객체지향)
+    //엔티티 값을 변경할 일이 있으면 핵심 비즈니스 로직 가지고 변경해야 맞다(바깥에서 계산X) -> 가장 객체 지향적인 구조
+    /**
+     * stock 증가
+     */
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    /**
+     * stock 감소
+     */
+    public void removeStock(int quantity) {
+        int restStock = this.stockQuantity - quantity;
+        if (restStock < 0) {
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity = restStock;
+    }
 }

@@ -21,5 +21,5 @@ public class Delivery {
     private Address address;
 
     @Enumerated(EnumType.STRING) //숫자로 들어감(ORDINAL-기본):다른 타입들어가면 망함
-    private DeliveryStatus deliveryStatus; //배송 상태 [READY, COMP]
+    private DeliveryStatus status; //배송 상태 [READY, COMP]
 }
