@@ -1,6 +1,8 @@
 package jpabook.japshop.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +14,7 @@ import java.util.List;
 @Table(name = "orders") //order 는 혼란 유발 하기 때문에 관례상 orders
 @Getter
 @Setter //Setter 는 안여는 게좋음 실무는
+@NoArgsConstructor(access = AccessLevel.PROTECTED) //생성 로직 이외 기본 생성 방지
 public class Order {
 
     @Id

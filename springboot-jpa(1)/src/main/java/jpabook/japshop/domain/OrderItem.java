@@ -1,7 +1,9 @@
 package jpabook.japshop.domain;
 
 import jpabook.japshop.domain.item.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "order_item")
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
     @Id
     @GeneratedValue
@@ -26,6 +29,8 @@ public class OrderItem {
 
     private int orderPrice; //주문 가격
     private int count; //주문 수량
+
+    //protected OrderItem() {} //생성 로직이외의 객체 생성 방지용(protected) == @NoArgsConstructor(access = AccessLevel.PROTECTED)
 
     //==생성 메서드==// : 생성하는게 단순하지 않음(쿠폰, 할인 등등 일정하지 않을 경우가 있음)
     public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
