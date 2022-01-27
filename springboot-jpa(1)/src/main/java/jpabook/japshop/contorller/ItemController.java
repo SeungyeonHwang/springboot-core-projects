@@ -69,17 +69,23 @@ public class ItemController {
     }
 
     @PostMapping("/items/{itemId}/edit")
-    public String updateItem(@PathVariable("itemId") String itemId, @ModelAttribute("form") BookForm form) { //updateItemForm object[form] 그대로 넘어 온다 @ModelAttribute
+    public String updateItem(@PathVariable("itemId") Long itemId, @ModelAttribute("form") BookForm form) { //updateItemForm object[form] 그대로 넘어 온다 @ModelAttribute
 
-        Book book = new Book();
-        book.setId(form.getId()); //id 조작의 가능성도 있기 때문에 유저가 아이템에 관한 권한이 있는지 체크 해줄 필요성이 있음(취약성)
-        book.setName(form.getName());
-        book.setPrice(form.getPrice());
-        book.setStockQuantity(form.getStockQuantity());
-        book.setAuthor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
+        //준영속성 Entity, 객체는 다르지만 JPA에 한번 들어갔다 나온것이라 식별자(id) 있기 때문에 같은걸로 판단
+        //영속성 관리자에서 관리X -> 더티체킹 안된다 -> 바꿔치기 해도 DB에 업데이트 안 일어남
+        //**어설프게 Contoller에서 엔티티를 생성하지 마라, 필요한것만 넘겨라
+//        Book book = new Book();
+//        book.setId(form.getId()); //id 조작의 가능성도 있기 때문에 유저가 아이템에 관한 권한이 있는지 체크 해줄 필요성이 있음(취약성)
+//        book.setName(form.getName());
+//        book.setPrice(form.getPrice());
+//        book.setStockQuantity(form.getStockQuantity());
+//        book.setAuthor(form.getAuthor());
+//        book.setIsbn(form.getIsbn());
 
-        itemService.saveItem(book);
+        //준영속 상태의 엔티티 의 변경 1.*추천 변경감지 2.merge
+        //1번은 원하는 속성만 변경 가능, 2번은 전부 변경 되버림(param으로 넘어온 것 들) -> null 생길 가능성 있다
+        itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity()); //1
+//        itemService.saveItem(book); //2
         return "redirect:/items";
     }
 }

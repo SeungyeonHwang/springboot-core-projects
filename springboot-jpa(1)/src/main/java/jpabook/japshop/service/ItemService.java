@@ -20,6 +20,19 @@ public class ItemService {
         itemRepository.save(item);
     }
 
+    @Transactional
+    public void updateItem(Long itemId,  String name, int price, int stockQuantity) { //파라미터 많은 경우 updateDto 사용
+        Item findItem = itemRepository.findOne(itemId); //영속 상태 -> 값변경 -> 더티체킹
+        //변경 감지 (@Transactional -> commit -> flush(JPA): 더티체킹)
+
+        //의미있는 변경이 행해져야한다, 단순 set을 깔면 안된다(실무) -> 변경지점이 엔티티로 간다(역추적 가능) setter 없이
+//        findItem.change(price, name, stockQuantity);
+//        findItem.addStock(...)
+        findItem.setName(name);
+        findItem.setPrice(price);
+        findItem.setStockQuantity(stockQuantity);
+    }
+
     public List<Item> findItems() {
         return itemRepository.findAll();
     }

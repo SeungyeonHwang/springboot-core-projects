@@ -31,6 +31,7 @@ public class OrderService {
     public Long order(Long memberId, Long itemId, int count) {
 
         //엔티티 조회 : 값을 꺼내기위해 Repository 필요
+        //Controller에서 찾는 것보다 여기서 찾는게 나은 설계(영속 상태로 진행, 상태같은것도 바꿀수 있다(조회는 상관없지만))
         Member member = memberRepository.findOne(memberId);
         Item item = itemRepository.findOne(itemId);
 
@@ -42,7 +43,7 @@ public class OrderService {
         OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count); //유지보수 위해서 여기 이외의 생성은 막아야 된다
 
         //주문 생성(static)
-        Order order = Order.createOrder(member, delivery, orderItem);
+        Order order = Order.createOrder(member, delivery, orderItem); //단순화 하기 위해 하나의 상품만 주문
 
         //주문 저장
         //이거 하나로 저장(cascade = CascadeType.ALL), 일괄 persist
@@ -63,7 +64,7 @@ public class OrderService {
     }
 
     //검색
-    public List<Order> findOrder(OrderSearch orderSearch) {
+    public List<Order> findOrders(OrderSearch orderSearch) {
         return orderRepository.findAllByCriteria(orderSearch);
     }
 }
