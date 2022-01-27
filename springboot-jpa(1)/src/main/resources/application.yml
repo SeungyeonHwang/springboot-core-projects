@@ -6,9 +6,9 @@ spring:
     driver-class-name: org.h2.Driver
 
   jpa:
-#    hibernate:
-#      #show_sql: true
-#      ddl-auto: create
+    hibernate:
+#      show_sql: true
+      ddl-auto: none #create, create-drop
     properties:
       hibernate.format_sql: true
 

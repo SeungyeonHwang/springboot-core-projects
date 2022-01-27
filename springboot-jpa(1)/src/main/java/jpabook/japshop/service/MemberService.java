@@ -69,4 +69,14 @@ public class MemberService {
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
     }
+
+    /**
+     * 회원 수정(API)
+     */
+    @Transactional
+    public void update(Long id, String name) {
+        Member member = memberRepository.findOne(id); //영속성 컨텍스트에서 찾아서 올려준다, member는 영속 상태(Transaction)
+        member.setName(name); //영속상태 변화 -> 자동 Update Query(Dirty Checking) / 값을 바꾸고 엔티티 바뀌고 트랜잭션 끝나고 커밋되는 시점에서 변경 감지
+        //영한님 정책 : 커맨드랑 쿼리를 분리한다 -> 여기서 member return 안함
+    }
 }
