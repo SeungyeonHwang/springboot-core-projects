@@ -8,10 +8,10 @@ spring:
   jpa:
     hibernate:
 #      show_sql: true
-      ddl-auto: none #create, create-drop
+      ddl-auto: create #create, create-drop, none
     properties:
       hibernate.format_sql: true
 
 logging.level:
   org.hibernate.SQL: debug
-  org.hibernate.type: trace 
+#  org.hibernate.type: trace

@@ -25,7 +25,8 @@ public class Order {
     //FK(업데이트하는 건 하나만 선택해야됨 양방향관계에서) -> 주인 정하기
     //연관관계 주인은 FK가 가까운 곳 (Order), 반대면 관리하기가 매우 힘듬, 성능 이슈 발생 가능성
     //주문한 회원에 대한 정보 맵핑, 그대로 둠
-    @ManyToOne(fetch = FetchType.LAZY)
+    //EAGER로 할경우 성능 최적화를 할 여지가 확 줄어든다
+    @ManyToOne(fetch = FetchType.LAZY) //지연로딩 -> DB가져올때는 Order데이터만 가져옴 (member = proxy 대신만들어 넣어둠), 값을 나중에 채워준다
     @JoinColumn(name = "member_id")
     private Member member;
 
