@@ -98,4 +98,16 @@ public class OrderRepository {
         TypedQuery<Order> query = em.createQuery(cq).setMaxResults(1000); //최대 1000건
         return query.getResultList();
     }
+
+    //Lazy 무시하고 값을 다 채워서 한번에 가져온다(실무에서 가장 자주 사용)
+    //Join fetch -> JPA 명령어, SQL 아니다
+    //가장 깔끔한 형태, 성능도 빠름
+    //적극적으로 활용할 것
+    public List<Order> findAllWithMemberDelivery() {
+        return em.createQuery(
+                        "select o from Order o" +
+                                " join fetch o.member m" +
+                                " join fetch o.delivery d", Order.class)
+                .getResultList();
+    }
 }
