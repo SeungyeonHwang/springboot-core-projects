@@ -40,3 +40,11 @@
   - 필요하면 fetch join으로 성능을 최적화 -> 대부분의 성능이슈 해결
   - 그래도 안되면 DTO로 직접 조회하는 방법을 사용한다
   - 최후의 방법은 JPA가 제공하는 네이티브 SQL이나 스프링 JDBC Template을 사용해서 SQL을 직접 사용한다
+- ⭐엔티티 조회 권장 순서
+  1. 엔티티조회방식으로우선접근
+     1. 페치조인으로 쿼리 수를 최적화 
+     2. 컬렉션 최적화
+        1. 페이징 필요 hibernate.default_batch_fetch_size , @BatchSize 로 최적화
+        2. 페이징 필요X 페치 조인 사용
+  2. 엔티티조회방식으로해결이안되면DTO조회방식사용
+  3. DTO 조회 방식으로 해결이 안되면 NativeSQL or 스프링 JdbcTemplate

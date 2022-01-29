@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+//@BatchSize(size = 100)
 @Entity
 @Table(name = "order_item")
 @Getter

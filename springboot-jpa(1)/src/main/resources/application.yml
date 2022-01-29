@@ -10,7 +10,9 @@ spring:
 #      show_sql: true
       ddl-auto: create #create, create-drop, none
     properties:
-      hibernate.format_sql: true
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100 #in query로 한방에 가져온다
 
 logging.level:
   org.hibernate.SQL: debug

@@ -30,6 +30,7 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
+//    @BatchSize(size = 100) global option인 batch_fetch_size를 특정 항목만 적용하고 싶을때 사용
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     //order가 persist 되면 orderItemA,B,C 일괄 persist / delete 마찬가지
     private List<OrderItem> orderItems = new ArrayList<>();

@@ -110,4 +110,28 @@ public class OrderRepository {
                                 " join fetch o.delivery d", Order.class)
                 .getResultList();
     }
+
+    public List<Order> findAllWithItem() {
+        return em.createQuery(
+                        //1, N , N만큼 데이터가 뻥튀기 된다(의도하지 않은 쿼리가 날라감)
+                        // -> 명확한 기준을 알려줘야 한다(Order에 대해서는 뻥튀기 하고 싶지 않다)
+                        //select 뒤 distinct 추가 -> 중복 방지(완전히 똑같지 않으면 DB query의 distinct 안된다)
+                        //JPA에서 자체적으로 같은 Id면 하나를 버린 상태에서 반환(한번 더 필터링 해준다)
+                        "select distinct o from Order o" +
+                                " join fetch o.member m" +
+                                " join fetch o.delivery d" +
+                                " join fetch o.orderItems oi" +
+                                " join fetch oi.item i", Order.class)
+                .getResultList();
+    }
+
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                        "select o from Order o" +
+                                " join fetch o.member m" +
+                                " join fetch o.delivery d", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
 }
