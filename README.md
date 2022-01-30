@@ -10,9 +10,9 @@
   - 🔹spring-core(1) : 스프링 핵심원리 - 기본편
   - 🔹spring-core(2) : 스프링 핵심원리 - 고급편
 - **HTTP**
-  - 🔹모든 개발자를 위한 HTTP 웹 기본 지식
+  - 🔸모든 개발자를 위한 HTTP 웹 기본 지식
 - **JPA & Query DSL**
-  - 🔸springboot-jpa(1) : 
+  - 🔘springboot-jpa(1) : 
     - 실전! 스프링 부트와 JPA 활용1 - 웹 애플리케이션 개발 
     - 실전! 스프링 부트와 JPA 활용2 - API 개발과 성능 최적화
   - 🔹자바 ORM 표준 JPA 프로그래밍 - 기본편
