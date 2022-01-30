@@ -1,7 +1,9 @@
 package jpabook.japshop.repository;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import jpabook.japshop.domain.Order;
-import lombok.RequiredArgsConstructor;
+import jpabook.japshop.domain.OrderStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -11,11 +13,19 @@ import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jpabook.japshop.domain.QMember.member;
+import static jpabook.japshop.domain.QOrder.order;
+
 @Repository
-@RequiredArgsConstructor
 public class OrderRepository {
 
     private final EntityManager em;
+    private final JPAQueryFactory query;
+
+    public OrderRepository(EntityManager em, JPAQueryFactory query) {
+        this.em = em;
+        this.query = new JPAQueryFactory(em);
+    }
 
     public void save(Order order) {
         em.persist(order);
@@ -97,6 +107,45 @@ public class OrderRepository {
         cq.where(cb.and(criteria.toArray(new Predicate[criteria.size()])));
         TypedQuery<Order> query = em.createQuery(cq).setMaxResults(1000); //최대 1000건
         return query.getResultList();
+    }
+
+    /**
+     * QueryDsl (추천)
+     * jpql 대신 자바 코드로 쿼리 작성 가능
+     * 장점 : 오타내면 바로 잡힘
+     */
+    public List<Order> findAll(OrderSearch orderSearch) {
+
+        //JPAQueryFactory query = new JPAQueryFactory(em); //생성자로 생략
+
+        //Static으로 생략 가능
+        //QOrder order = QOrder.order;
+        //QMember member = QMember.member;
+
+        //jpql로 변환되어 실행됨
+        return query.select(order)
+                .from(order)
+                .join(order.member, member)
+                .where(statusEq(orderSearch.getOrderStatus()),
+                        nameLike(orderSearch.getMemberName())) //동적쿼리 Add Condition, null일경우 버림
+//                .where(order.status.eq(orderSearch.getOrderStatus())) //정적 쿼리
+                .limit(1000)
+                .fetch();
+    }
+
+    //동적 쿼리
+    private BooleanExpression nameLike(String memberName) {
+        if (!StringUtils.hasText(memberName)) {
+            return null;
+        }
+        return member.name.like(memberName);
+    }
+
+    private BooleanExpression statusEq(OrderStatus statusCond) {
+        if (statusCond == null) {
+            return null;
+        }
+        return order.status.eq(statusCond);
     }
 
     //Lazy 무시하고 값을 다 채워서 한번에 가져온다(실무에서 가장 자주 사용)

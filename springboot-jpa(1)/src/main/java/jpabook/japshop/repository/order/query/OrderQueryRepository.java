@@ -81,7 +81,6 @@ public class OrderQueryRepository {
                 .getResultList();
     }
 
-
     private List<OrderQueryDto> findOrders() {
         return em.createQuery(
                         "select new jpabook.japshop.repository.order.query.OrderQueryDto(" +

@@ -1,7 +1,7 @@
 package jpabook.japshop.service;
 
 import jpabook.japshop.domain.Member;
-import jpabook.japshop.repository.MemberRepository;
+import jpabook.japshop.repository.MemberRepositoryOld;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,8 @@ import static org.junit.Assert.fail;
 public class MemberServiceTest {
 
     @Autowired MemberService memberService; //가장 간단한 형태
-    @Autowired MemberRepository memberRepository;
+    @Autowired
+    MemberRepositoryOld memberRepository;
     //@Autowired EntityManager em;
 
     @Test

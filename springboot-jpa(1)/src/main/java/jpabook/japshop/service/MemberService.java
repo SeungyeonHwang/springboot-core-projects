@@ -50,7 +50,7 @@ public class MemberService {
     private void validateDuplicateMember(Member member) {
         //EXCEPTION
         //실무에서는 동시 가입의 경우도 존재 하기 때문에 name을 DB의 유니크 조건으로 거는 것을 추천 한다
-        List<Member> findMembers = memberRepository.findByName(member.getName());
+        List<Member> findMembers = memberRepository.findByName(member.getName()); //인터페이스에선 구현X
         if (!findMembers.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
@@ -61,13 +61,13 @@ public class MemberService {
      */
     public List<Member> findMembers() {
         return memberRepository.findAll();
-    }
+    } //JPA에서 범용적 쿼리 다 구현되어 있다
 
     /**
      * 단건 회원 조회
      */
     public Member findOne(Long memberId) {
-        return memberRepository.findOne(memberId);
+        return memberRepository.findById(memberId).get();
     }
 
     /**
@@ -75,7 +75,7 @@ public class MemberService {
      */
     @Transactional
     public void update(Long id, String name) {
-        Member member = memberRepository.findOne(id); //영속성 컨텍스트에서 찾아서 올려준다, member는 영속 상태(Transaction)
+        Member member = memberRepository.findById(id).get(); //영속성 컨텍스트에서 찾아서 올려준다, member는 영속 상태(Transaction)
         member.setName(name); //영속상태 변화 -> 자동 Update Query(Dirty Checking) / 값을 바꾸고 엔티티 바뀌고 트랜잭션 끝나고 커밋되는 시점에서 변경 감지
         //영한님 정책 : 커맨드랑 쿼리를 분리한다 -> 여기서 member return 안함
     }

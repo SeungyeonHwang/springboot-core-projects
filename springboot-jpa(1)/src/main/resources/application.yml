@@ -13,6 +13,7 @@ spring:
       hibernate:
         format_sql: true
         default_batch_fetch_size: 100 #in query로 한방에 가져온다
+#    open-in-view: false #영속성 컨텍스트,DB Connection 살아있는 주기 조절
 
 logging.level:
   org.hibernate.SQL: debug

@@ -6,7 +6,7 @@ import jpabook.japshop.domain.Order;
 import jpabook.japshop.domain.OrderItem;
 import jpabook.japshop.domain.item.Item;
 import jpabook.japshop.repository.ItemRepository;
-import jpabook.japshop.repository.MemberRepository;
+import jpabook.japshop.repository.MemberRepositoryOld;
 import jpabook.japshop.repository.OrderRepository;
 import jpabook.japshop.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import java.util.List;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final MemberRepository memberRepository;
+    private final MemberRepositoryOld memberRepository;
     private final ItemRepository itemRepository;
 
     /**
@@ -65,6 +65,6 @@ public class OrderService {
 
     //검색
     public List<Order> findOrders(OrderSearch orderSearch) {
-        return orderRepository.findAllByCriteria(orderSearch);
+        return orderRepository.findAll(orderSearch);
     }
 }
