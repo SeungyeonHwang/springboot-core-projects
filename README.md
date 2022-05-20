@@ -1,6 +1,13 @@
 # springboot-core-projects
 
 ## ***JAVA***
+ 
+<pre>
+🔹 : New  
+🔸 : WIP  
+🔘 : Done
+</pre>
+
 ### 김영한 SpringBoot & JPA 
 - **Spring Web Framwork**
   - 🔘springboot-web(1) : (1)스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술 【DONE】
@@ -10,7 +17,7 @@
   - 🔹spring-core(1) : 스프링 핵심원리 - 기본편
   - 🔹spring-core(2) : 스프링 핵심원리 - 고급편
 - **HTTP**
-  - 🔸HTTP_base_knowledge : 모든 개발자를 위한 HTTP 웹 기본 지식
+  - 🔘HTTP_base_knowledge : 모든 개발자를 위한 HTTP 웹 기본 지식
 - **JPA & Query DSL**
   - 🔘springboot-jpa(1) : 
     - 실전! 스프링 부트와 JPA 활용1 - 웹 애플리케이션 개발 
