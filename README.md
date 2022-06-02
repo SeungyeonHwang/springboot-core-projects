@@ -1,6 +1,5 @@
 # springboot-core-projects
 <b>Study for 「Spring FrameWork」 and 「JPA」</b>  
-https://github.com/SeungyeonHwang/springboot-core-projects
 
 <pre>
 🔹 : New  
